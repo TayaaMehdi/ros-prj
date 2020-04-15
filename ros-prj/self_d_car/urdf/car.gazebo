@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<robot name="car" xmlns:xacro="http://www.ros.org/wiki/xacro">
+	--Body--
+	<link name="body">
+		<inertial>
+			<mass value=""/>
+			<inertia ixx="" ixy="" ixz="" iyy="" iyz="" izz=""/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="2 1 0.5"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="2 1 0.5"/>
+			</geometry>
+			<material name="red">
+				<color rgba="1 0 0 1"/>
+			</material>
+		</visual>
+	</link>
+	
+	<gazebo reference="Body">
+		<material>Gazebo/Red</material>
+		<pose>0 0 2 0 0</pose>
+	</gazebo>
+	--Front_Right_Wheel--
+	<link name="frw">
+		<inertial>
+			<mass value=""/>
+			<inertia ixx="" ixy="" ixz="" iyy="" iyz="" izz=""/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+			<meterial name="black">
+				<color rgba="0 0 0 1"/>
+			</material>
+		</visual>
+	</link>
+
+	<gazebo reference="front_right_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+	--Front Left Wheel--  
+	<link name="flw">
+		<inertial>
+			<mass value=""/>
+			<inertia ixx="" ixy="" ixz="" iyy="" iyz="" izz=""/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+			<material name="black">
+				<color rgba="0 0 0 1"/>
+			</material>
+		</visual>
+	</link>
+	
+	<gazebo reference="front_left_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+	--Rear Right Wheel-- 
+	<link name="rrw">
+		<inertial>
+			<mass value=""/>
+			<inertia ixx="" ixy="" ixz="" iyy="" iyz="" izz=""/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+			<material name="black">
+				<color rgba="0 0 0 1"/>
+			</material>
+		</visual>
+	</link>
+	
+	<gazebo reference="rear_right_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+	--Rear Left Wheel--
+	<link name="rlw">
+		<inertial>
+			<mass value=""/>
+			<inertia ixx="" ixy="" ixz="" iyy="" iyz="" izz=""/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="1.570795"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+			<material name="black">
+				<color rgba="0 0 0 1"/>
+			</material>
+		</visual>
+	</link>
+
+	<gazebo reference="rear_left_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+	--liaisons--
+	<joint name="jfrw" type="continuous">
+		<parent link="body"/>
+		<child link="frw"/>
+		<origin xyz="0.3 -0.6 0" rpy="0 0 0"/>
+		<axis xyz="0 1 0"/>
+	</joint>
+
+	<joint name="jflw" type="continuous">
+		<parent link="body"/>
+		<child link="flw"/>
+		<origin xyz="0.3 0.6 0" rpy="0 0 0"/>
+		<axis xyz="0 1 0"/>
+	</joint>
+
+	<joint name="jrrw" type="continuous">
+		<parent link="body"/>
+		<child link="rrw"/>
+		<origin xyz="-0.3 -0.6 0" rpy="0 0 0"/>
+		<axis xyz="0 1 0"/>
+	</joint>
+
+	<joint name="jrlw" type="continuous">
+		<parent link="body"/>
+		<child link="rlw"/>
+		<origin xyz="-0.3 0.6 0" rpy="0 0 0"/>
+		<axis xyz="0 1 0"/>
+	</joint>
+
+</robot>
+

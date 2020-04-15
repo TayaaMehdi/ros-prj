@@ -1,0 +1,17 @@
+digraph G {
+node [shape=box];
+"body" [label="body"];
+"flw" [label="flw"];
+"frw" [label="frw"];
+"rlw" [label="rlw"];
+"rrw" [label="rrw"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"body" -> "jflw" [label="xyz: 0.7 0.6 0 \nrpy: 0 -0 0"]
+"jflw" -> "flw"
+"body" -> "jfrw" [label="xyz: 0.7 -0.6 0 \nrpy: 0 -0 0"]
+"jfrw" -> "frw"
+"body" -> "jrlw" [label="xyz: -0.7 0.6 0 \nrpy: 0 -0 0"]
+"jrlw" -> "rlw"
+"body" -> "jrrw" [label="xyz: -0.7 -0.6 0 \nrpy: 0 -0 0"]
+"jrrw" -> "rrw"
+}

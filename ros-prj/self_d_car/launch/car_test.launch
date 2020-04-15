@@ -1,0 +1,14 @@
+<launch>
+	<arg name="model"/>
+	<param name="robot_description" textfile="$(find self_d_car)/urdf/$(arg model)"/>
+	
+	<include file="$(find self_d_car)/launch/gazebo.launch">
+		<arg name="model" value="$(arg model)"/>
+	</include>
+	
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find self_d_car)/conf.rviz" required="true" />
+	
+</launch>	

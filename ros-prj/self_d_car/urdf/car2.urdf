@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<robot name="car" xmlns:xacro="http://www.ros.org/wiki/xacro">
+	--dummy--
+	<link name="dummy">
+	</link>
+	--Body--
+	<link name="body">
+		<inertial>
+			<mass value="1"/>
+			<inertia ixx="1" ixy="1" ixz="1" iyy="1" iyz="1" izz="1"/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="2 1 0.2"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="2 1 0.5"/>
+			</geometry>
+			<material name="red">
+				<color rgba="1 0 0 1"/>
+			</material>
+		</visual>
+	</link>
+	--Front Right Wheel--
+	<link name="frw">
+		<inertial>
+			<mass value="1"/>
+			<inertia ixx="1" ixy="1" ixz="1" iyy="1" iyz="1" izz="1"/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+			<material name="black">
+				<color rgba="0 0 0 1"/>
+			</material>
+			
+		</visual>
+	</link>
+	--Front Left Wheel--
+	<link name="flw">
+		<inertial>
+			<mass value="1"/>
+			<inertia ixx="1" ixy="1" ixz="1" iyy="1" iyz="1" izz="1"/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+			<material name="black">
+				<color rgba="0 0 0 1"/>
+			</material>
+		</visual>
+	</link>
+	--Rear Right Wheel--
+	<link name="rrw">
+		<inertial>
+			<mass value="1"/>
+			<inertia ixx="1" ixy="1" ixz="1" iyy="1" iyz="1" izz="1"/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+			<material name="black">
+				<color rgba="0 0 0 1"/>
+			</material>
+		</visual>
+	</link>
+	--Rear Left Wheel--
+	<link name="rlw">
+		<inertial>
+			<mass value="1"/>
+			<inertia ixx="1" ixy="1" ixz="1" iyy="1" iyz="1" izz="1"/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="1.570795 0 0"/>
+			<geometry>
+				<cylinder length="0.2" radius="0.4"/>
+			</geometry>
+			<material name="black">
+				<color rgba="0 0 0 1"/>
+			</material>
+		</visual>
+	</link>
+	--liaisons--
+	<joint name="dummy_joint" type="fixed">
+		<parent link="dummy"/>
+		<child link="body"/>
+	</joint>
+	<joint name="jfrw" type="continuous">
+		<parent link="body"/>
+		<child link="frw"/>
+		<origin xyz="0.7 -0.6 0" rpy="0 0 0"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100" lower="-1.570795" upper="1.570795" velocity="0.5"/>
+		<dynamics damping="0.0" friction="0.0"/>
+	</joint>
+
+	<joint name="jflw" type="continuous">
+		<parent link="body"/>
+		<child link="flw"/>
+		<origin xyz="0.7 0.6 0" rpy="0 0 0"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100" lower="-1.570795" upper="1.570795" velocity="0.5"/>
+	     	<dynamics damping="0.0" friction="0.0"/>	
+	</joint>
+
+	<joint name="jrrw" type="continuous">
+		<parent link="body"/>
+		<child link="rrw"/>
+		<origin xyz="-0.7 -0.6 0" rpy="0 0 0"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100" velocity="0.5"/>
+		<dynamics damping="0.0" friction="0.0"/>
+	</joint>
+
+	<joint name="jrlw" type="continuous">
+		<parent link="body"/>
+		<child link="rlw"/>
+		<origin xyz="-0.7 0.6 0" rpy="0 0 0"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100" velocity="0.5"/>
+		<dynamics damping="0.0" friction="0.0"/>
+	</joint>
+
+	<gazebo>
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+			<robotNamespace>/car</robotNamespace>
+		</plugin>
+	</gazebo>
+
+	<transmission name="jfrw_trns">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="jfrw">
+			<hardwareInterface>VelocityJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="jfrw_motor">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+</robot>
+

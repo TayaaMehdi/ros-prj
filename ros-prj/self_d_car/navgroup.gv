@@ -1,0 +1,38 @@
+digraph G {
+node [shape=box];
+"base_link" [label="base_link"];
+"back_left_wheel_link" [label="back_left_wheel_link"];
+"back_right_wheel_link" [label="back_right_wheel_link"];
+"front_link" [label="front_link"];
+"front_left_bar_link" [label="front_left_bar_link"];
+"front_left_wheel_link" [label="front_left_wheel_link"];
+"front_right_bar_link" [label="front_right_bar_link"];
+"front_right_wheel_link" [label="front_right_wheel_link"];
+"steer_link" [label="steer_link"];
+"ackermann_bar_link" [label="ackermann_bar_link"];
+"laser_base_link" [label="laser_base_link"];
+"base_scan_link" [label="base_scan_link"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"base_link" -> "back_left_wheel_joint" [label="xyz: -0.16 0.1 -0.1 \nrpy: 0 -0 0"]
+"back_left_wheel_joint" -> "back_left_wheel_link"
+"base_link" -> "back_right_wheel_joint" [label="xyz: -0.16 -0.1 -0.1 \nrpy: 0 -0 0"]
+"back_right_wheel_joint" -> "back_right_wheel_link"
+"base_link" -> "front_joint" [label="xyz: 0.16 0 -0.1 \nrpy: 0 -0 0"]
+"front_joint" -> "front_link"
+"front_link" -> "front_left_bar_joint" [label="xyz: 0 0.06 0 \nrpy: 0 -0 0"]
+"front_left_bar_joint" -> "front_left_bar_link"
+"front_left_bar_link" -> "front_left_wheel_joint" [label="xyz: 0 0.04 0 \nrpy: 0 -0 0"]
+"front_left_wheel_joint" -> "front_left_wheel_link"
+"front_link" -> "front_right_bar_joint" [label="xyz: 0 -0.06 0 \nrpy: 0 -0 0"]
+"front_right_bar_joint" -> "front_right_bar_link"
+"front_right_bar_link" -> "front_right_wheel_joint" [label="xyz: 0 -0.04 0 \nrpy: 0 -0 0"]
+"front_right_wheel_joint" -> "front_right_wheel_link"
+"front_link" -> "steer_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"steer_joint" -> "steer_link"
+"steer_link" -> "ackermann_joint" [label="xyz: -0.04 0 0 \nrpy: 0 -0 0"]
+"ackermann_joint" -> "ackermann_bar_link"
+"base_link" -> "laser_base_mount_joint" [label="xyz: 0 0 0.05 \nrpy: 0 -0 0"]
+"laser_base_mount_joint" -> "laser_base_link"
+"laser_base_link" -> "base_scan_joint" [label="xyz: 0 0 0.05 \nrpy: 0 -0 0"]
+"base_scan_joint" -> "base_scan_link"
+}
